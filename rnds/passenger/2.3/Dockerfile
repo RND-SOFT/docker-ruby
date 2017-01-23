@@ -20,9 +20,11 @@ RUN mkdir -p ~/.ssh && echo "Host * \
   \nStrictHostKeyChecking no \
   \nUserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
 
+ENV HOME /root
+
 WORKDIR /home/app
 
-CMD ["/bin/bash"]
+CMD ["/sbin/my_init"]
 
 
 
