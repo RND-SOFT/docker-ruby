@@ -8,6 +8,7 @@ RUN apt-get update && apt-get upgrade -y &&\
 
 RUN apt-get update &&\
   apt-get -y install mysql-client unixodbc libpq5 libmysqlclient-dev libpq-dev node npm &&\
+  npm install uglify-js -g &&\
   apt-get clean &&\
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
