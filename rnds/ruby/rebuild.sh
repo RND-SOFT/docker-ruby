@@ -1,1 +1,1 @@
-docker-compose build --force-rm --pull && docker-compose push
+docker-compose build --force-rm && docker-compose push
