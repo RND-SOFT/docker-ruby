@@ -1,0 +1,16 @@
+version: "2"
+services:
+  ruby-2.3.0:
+    build: 2.3.0/
+    image: rnds/ruby:2.3.0
+    working_dir: /home/app
+
+  ruby-2.3.0-test:
+    build: 2.3.0/test
+    image: rnds/ruby:2.3.0-test
+    working_dir: /home/app
+    depends_on:
+      - ruby-2.3.0
+    
+
+

@@ -16,7 +16,7 @@ RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc &&\
   gem install bundler --no-ri --no-rdoc
 
 RUN mkdir -p ~/.ssh && echo "Host * \
-  \nStrictHostKeyChecking no \
+  \nStrictHostKeyChecking no  \
   \nUserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
 
 WORKDIR /home/app
