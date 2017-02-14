@@ -23,7 +23,7 @@ ENV CHROME=/opt/google/chrome/google-chrome
 
 RUN mv ${CHROME} ${CHROME}.orig &&\
   echo "#!/bin/sh" >> ${CHROME} &&\
-  echo "exec ${CHROME}.orig --no-sandbox --disable-gpu --disable-sandbox --user-data-dir=/tmp/ \$@" >> ${CHROME} &&\
+  echo "exec ${CHROME}.orig --no-sandbox --disable-gpu --disable-sandbox --user-data-dir=/tmp/ \$@" >> ${CHROME}  &&\
   chmod 777 ${CHROME}
 
 
