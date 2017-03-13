@@ -2,7 +2,7 @@ FROM phusion/passenger-ruby23
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y &&\
-  apt-get -y install libxext6 libxrender1 curl wget git build-essential libmysqlclient-dev libpq-dev &&\
+  apt-get -y install libxext6 libxrender1 curl wget git build-essential libsqlite3-dev libmysqlclient-dev libpq-dev &&\
   apt-get clean &&\
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
