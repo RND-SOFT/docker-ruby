@@ -1,21 +1,21 @@
 version: "2"
 services:
   ruby-2.3.0:
-    build: rnds/ruby/2.3.0/
-    image: rnds/ruby:2.3.0
-    working_dir: /home/app
+    extends:
+      file: rnds/ruby/2.3.0/docker-compose.yml
+      service: ruby-2.3.0
 
   ruby-2.3.0-test:
-    build: rnds/ruby/2.3.0/test
-    image: rnds/ruby:2.3.0-test
-    working_dir: /home/app
+    extends:
+      file: rnds/ruby/2.3.0/test/docker-compose.yml
+      service: ruby-2.3.0-test
     depends_on:
       - ruby-2.3.0
 
   passenger-2.3:
-    build: rnds/passenger/2.3/
-    image: rnds/passenger:2.3
-    working_dir: /home/app
+    extends:
+      file: rnds/passenger/2.3/docker-compose.yml
+      service: passenger-2.3
     
 
 

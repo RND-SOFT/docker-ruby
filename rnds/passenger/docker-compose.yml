@@ -1,10 +1,9 @@
 version: "2"
 services:
-  ruby-2.3.0:
-    build: 2.3/
-    image: rnds/passenger:2.3
-    working_dir: /home/app
-
+  passenger-2.3:
+    extends:
+      file: 2.3/docker-compose.yml
+      service: passenger-2.3
     
 
 
