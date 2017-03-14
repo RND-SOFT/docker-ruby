@@ -1,0 +1,10 @@
+version: "2"
+services:
+  ruby-2.3.0:
+    build: 2.3/
+    image: rnds/passenger:2.3
+    working_dir: /home/app
+
+    
+
+
