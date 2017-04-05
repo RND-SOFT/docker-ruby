@@ -1,4 +1,4 @@
-FROM phusion/passenger-ruby23
+FROM phusion/passenger-full
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y &&\
