@@ -1,0 +1,9 @@
+version: "2"
+services:
+  passenger-2.3-cap:
+    build: ./
+    image: rnds/passenger:2.3-cap
+    working_dir: /home/app
+    
+
+

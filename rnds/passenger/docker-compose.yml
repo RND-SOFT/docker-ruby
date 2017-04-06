@@ -4,6 +4,13 @@ services:
     extends:
       file: 2.3/docker-compose.yml
       service: passenger-2.3
+
+  passenger-2.3-cap:
+    extends:
+      file: 2.3/cap/docker-compose.yml
+      service: passenger-2.3-cap
+    depends_on:
+      - passenger-2.3
     
 
 
