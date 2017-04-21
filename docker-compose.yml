@@ -24,5 +24,11 @@ services:
     depends_on:
       - passenger-2.3
     
+  passenger-2.3-gen:
+    extends:
+      file: rnds/passenger/2.3/cap/gen/docker-compose.yml
+      service: passenger-2.3-gen
+    depends_on:
+      - passenger-2.3-cap
 
 

@@ -1,0 +1,9 @@
+version: "2"
+services:
+  passenger-2.3-gen:
+    build: ./
+    image: rnds/passenger:2.3-gen
+    working_dir: /home/app
+    
+
+
