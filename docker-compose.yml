@@ -32,3 +32,7 @@ services:
       - passenger-2.3-cap
 
 
+  passenger-slim:
+    extends:
+      file: rnds/passenger/slim/docker-compose.yml
+      service: passenger-slim

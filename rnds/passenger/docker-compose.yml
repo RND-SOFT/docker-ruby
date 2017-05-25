@@ -13,4 +13,8 @@ services:
       - passenger-2.3
     
 
+  passenger-slim:
+    extends:
+      file: slim/docker-compose.yml
+      service: passenger-slim
 
