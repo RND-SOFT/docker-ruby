@@ -9,8 +9,6 @@ RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtsOlzYQ4y+7BOFOH+tCzjCVvZxT4kotXsx
  && /etc/my_init.d/00_regen_ssh_host_keys.sh \
  && rm /etc/nginx/sites-enabled/default
 
-RUN bash -lc 'rvm --default use ruby-2.3.3'
-
 WORKDIR /home/app
 
 CMD ["/sbin/my_init"]

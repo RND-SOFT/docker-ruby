@@ -29,7 +29,7 @@ default_algorithms = ALL" >> /tmp/ssl.conf &&\
 RUN rm -f /etc/service/nginx/down \
  && rm /etc/nginx/sites-enabled/default
 
-RUN bash -lc 'rvm --default use ruby-2.3.1'
+RUN bash -lc 'rvm --default use ruby-2.3.3'
 
 RUN echo '---' > ~/.gemrc &&\
   echo 'gem: --no-ri --no-rdoc' >> ~/.gemrc &&\

@@ -28,8 +28,7 @@ soft_load=1 \
 default_algorithms = ALL" >> /tmp/ssl.conf &&\
   mv /tmp/ssl.conf /etc/ssl/openssl.cnf
 
-RUN bash -lc 'rvm list'
-RUN bash -lc 'rvm --default use ruby-2.3.1'
+RUN bash -lc 'rvm --default use ruby-2.3.3'
 
 RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc &&\
   gem install bundler --no-ri --no-rdoc
