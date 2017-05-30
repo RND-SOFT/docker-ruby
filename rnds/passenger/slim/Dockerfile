@@ -12,6 +12,21 @@ RUN apt-get update &&\
   apt-get clean &&\
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN echo 'openssl_conf = openssl_def' > /tmp/ssl.conf &&\
+  cat /etc/ssl/openssl.cnf >> /tmp/ssl.conf &&\
+  echo "
+[openssl_def]
+engines = engine_section
+
+[engine_section]
+gost = gost_section
+
+[gost_section]
+soft_load=1
+default_algorithms = ALL
+" >> /tmp/ssl.conf &&\
+  mv /tmp/ssl.conf /etc/ssl/openssl.cnf
+
 RUN rm -f /etc/service/nginx/down \
  && rm /etc/nginx/sites-enabled/default
 
