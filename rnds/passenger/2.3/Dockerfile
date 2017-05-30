@@ -17,15 +17,15 @@ RUN apt-get update &&\
 RUN echo 'openssl_conf = openssl_def' > /tmp/ssl.conf &&\
   cat /etc/ssl/openssl.cnf >> /tmp/ssl.conf &&\
   echo "\
-[openssl_def] \
-engines = engine_section \
-\
-[engine_section] \
-gost = gost_section \
-\
-[gost_section] \
-soft_load=1 \
-default_algorithms = ALL" >> /tmp/ssl.conf &&\
+\n[openssl_def] \
+\nengines = engine_section \
+\n\
+\n[engine_section] \
+\ngost = gost_section \
+\n\
+\n[gost_section] \
+\nsoft_load=1 \
+\ndefault_algorithms = ALL" >> /tmp/ssl.conf &&\
   mv /tmp/ssl.conf /etc/ssl/openssl.cnf
 
 RUN bash -lc 'rvm --default use ruby-2.3.3'
