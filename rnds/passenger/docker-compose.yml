@@ -18,3 +18,9 @@ services:
       file: slim/docker-compose.yml
       service: passenger-slim
 
+  passenger-slim-build:
+    extends:
+      file: slim/build/docker-compose.yml
+      service: passenger-slim-build
+    depends_on:
+      - passenger-slim

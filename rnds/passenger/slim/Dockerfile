@@ -2,7 +2,7 @@ FROM phusion/passenger-ruby23
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y &&\
-  apt-get -y install curl wget openssh-client git build-essential &&\
+  apt-get -y install curl wget openssh-client git &&\
   apt-get clean &&\
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

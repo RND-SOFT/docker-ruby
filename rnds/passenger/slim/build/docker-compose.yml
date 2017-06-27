@@ -1,0 +1,9 @@
+version: "2"
+services:
+  passenger-slim-build:
+    build: ./
+    image: rnds/passenger:slim-build
+    working_dir: /home/app
+    
+
+
