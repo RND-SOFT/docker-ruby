@@ -36,3 +36,10 @@ services:
     extends:
       file: rnds/passenger/slim/docker-compose.yml
       service: passenger-slim
+
+  passenger-slim-build:
+    extends:
+      file: rnds/passenger/slim/build/docker-compose.yml
+      service: passenger-slim-build
+    depends_on:
+      - passenger-slim
