@@ -2,7 +2,7 @@ FROM rnds/ruby:2.3.0
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 RUN apt-get update &&\
-  apt-get -y install xvfb libodbc1 libltdl7 libgconf-2-4 imagemagick &&\
+  apt-get -y  install xvfb libodbc1 libltdl7 libgconf-2-4 imagemagick &&\
   apt-get -y install fonts-liberation libappindicator1 libindicator7 libdbusmenu-gtk4 libdbusmenu-glib4 libpango1.0-0 libpangox-1.0-0 libpangoxft-1.0-0 &&\
   apt-get clean &&\
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
