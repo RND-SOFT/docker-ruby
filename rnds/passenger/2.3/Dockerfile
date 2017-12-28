@@ -3,13 +3,15 @@ MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y &&\
   apt-get -y install curl wget openssh-client git build-essential &&\
-  apt-get -y install libxext6 libxrender1 &&\
+  apt-get -y install libxext6 libxrender1&&\
+  DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata &&\
   apt-get clean &&\
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
+  ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 
 RUN apt-get update &&\
   apt-get -y install unixodbc libpq5 libpq-dev nodejs npm &&\
-  apt-get -y install mysql-client libmysqlclient-dev libsqlite3-dev imagemagick &&\
+  apt-get -y install mysql-client libmysqlclient-dev libsqlite3-dev imagemagick mc &&\
   npm install uglify-js -g &&\
   apt-get clean &&\
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
