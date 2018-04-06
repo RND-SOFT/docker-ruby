@@ -1,0 +1,10 @@
+version: "2"
+services:
+  gitlab-runner:
+    extends:
+      file: latest/docker-compose.yml
+      service: gitlab-runner
+
+    
+
+

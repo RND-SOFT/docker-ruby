@@ -1,0 +1,10 @@
+version: "2"
+services:
+  gitlab-runner:
+    build: 
+      context: ./
+    image: rnds/gitlab-runner
+    working_dir: /home/app
+    
+
+
