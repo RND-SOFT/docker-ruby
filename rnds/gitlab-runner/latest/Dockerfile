@@ -63,7 +63,7 @@ RUN set -ex \
 
 
 RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc &&\
-  gem install bundler --no-ri --no-rdoc
+  gem install bundler httparty active_support --no-ri --no-rdoc
 
 RUN set -ex \
   && apk add --no-cache \
