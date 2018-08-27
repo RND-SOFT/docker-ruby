@@ -62,8 +62,9 @@ RUN set -ex \
     zlib-dev
 
 
-RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc &&\
-  gem install bundler httparty activesupport --no-ri --no-rdoc
+RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc \
+  && gem install docker_toolkit --no-ri --no-rdoc \
+  && gem update docker_toolkit --no-ri --no-rdoc
 
 RUN set -ex \
   && apk add --no-cache \
@@ -76,7 +77,7 @@ RUN set -ex \
 
 RUN mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
 
-COPY docker-compose merger.rb /usr/bin/
+COPY docker-compose /usr/bin/
 
 RUN chmod +x /usr/bin/docker-compose
 
