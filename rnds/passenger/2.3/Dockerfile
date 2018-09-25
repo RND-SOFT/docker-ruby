@@ -2,7 +2,7 @@ FROM phusion/passenger-ruby23
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y &&\
-  apt-get -y install curl wget openssh-client git build-essential &&\
+  apt-get -y install curl wget openssh-client git build-essential net-tools &&\
   apt-get -y install libxext6 libxrender1&&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata &&\
   apt-get clean &&\
@@ -30,7 +30,7 @@ RUN echo 'openssl_conf = openssl_def' > /tmp/ssl.conf &&\
 \ndefault_algorithms = ALL" >> /tmp/ssl.conf &&\
   mv /tmp/ssl.conf /etc/ssl/openssl.cnf
 
-RUN bash -lc 'rvm --default use ruby-2.3.3'
+RUN bash -lc 'rvm --default use ruby-2.3.7'
 
 RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc &&\
   gem install bundler --no-ri --no-rdoc

@@ -29,7 +29,7 @@ RUN echo 'openssl_conf = openssl_def' > /tmp/ssl.conf &&\
 RUN rm -f /etc/service/nginx/down \
  && rm /etc/nginx/sites-enabled/default
 
-RUN bash -lc 'rvm --default use ruby-2.3.6'
+RUN bash -lc 'rvm --default use ruby-2.3.7'
 
 RUN echo '---' > ~/.gemrc &&\
   echo 'gem: --no-ri --no-rdoc' >> ~/.gemrc &&\

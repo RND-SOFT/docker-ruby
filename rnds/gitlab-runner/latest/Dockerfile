@@ -81,7 +81,8 @@ COPY docker-compose /usr/bin/
 
 RUN chmod +x /usr/bin/docker-compose
 
-RUN gem install rspec activesupport bigdecimal json awesome_print httparty --no-ri --no-rdoc
+RUN gem install rspec activesupport bigdecimal json awesome_print \
+                httparty bundler socksify net-ssh io-console --no-ri --no-rdoc
 
 CMD ["/bin/bash"]
 
