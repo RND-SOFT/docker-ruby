@@ -1,5 +1,10 @@
+FROM rnds/openssl-gost AS openssl-gost
 FROM phusion/passenger-ruby23
 MAINTAINER Firmhouse "kinnalru@gmail.com"
+
+COPY --from=openssl-gost /usr/local/ssl /usr/local/ssl
+COPY --from=openssl-gost /usr/local/ssl/bin/openssl /usr/bin/openssl
+COPY --from=openssl-gost /usr/local/ssl/lib/pkgconfig/* /usr/lib/x86_64-linux-gnu/pkgconfig/
 
 RUN apt-get update && apt-get upgrade -y &&\
   apt-get -y install curl wget openssh-client git &&\

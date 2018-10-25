@@ -1,3 +1,4 @@
+FROM rnds/openssl-gost AS openssl-gost
 FROM phusion/passenger-ruby23
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
@@ -8,6 +9,10 @@ RUN apt-get update && apt-get upgrade -y &&\
   apt-get clean &&\
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
   ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+
+COPY --from=openssl-gost /usr/local/ssl /usr/local/ssl
+COPY --from=openssl-gost /usr/local/ssl/bin/openssl /usr/bin/openssl
+COPY --from=openssl-gost /usr/local/ssl/lib/pkgconfig/* /usr/lib/x86_64-linux-gnu/pkgconfig/
 
 RUN apt-get update &&\
   apt-get -y install unixodbc libpq5 libpq-dev nodejs npm &&\
