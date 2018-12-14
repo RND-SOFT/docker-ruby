@@ -52,7 +52,10 @@ RUN curl -sSLo /tmp/consul.zip https://releases.hashicorp.com/consul/1.2.2/consu
 RUN set -ex \
   && curl https://releases.rancher.com/cli2/v2.0.5/rancher-linux-amd64-v2.0.5.tar.gz | tar -xz \
   && cp ./rancher-*/rancher /bin/rancher \
-  && rm -rf rancher-*
+  && rm -rf rancher-* \
+  && curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+  && mv ./kubectl /bin \
+  && chmod +x /bin/kubectl
 
 
 
