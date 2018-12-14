@@ -27,10 +27,36 @@ RUN mv ${CHROME} ${CHROME}.orig &&\
   echo "exec ${CHROME}.orig --no-sandbox --disable-gpu --disable-sandbox --user-data-dir=/tmp/ \$@" >> ${CHROME}   &&\
   chmod 777 ${CHROME}
 
+RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc \
+  && gem install docker_toolkit --no-ri --no-rdoc \
+  && gem update docker_toolkit --no-ri --no-rdoc
+
+RUN apt-get update && apt-get remove docker || true && apt-get remove docker-engine || true && apt-get remove docker.io || true \
+  && apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common unzip \
+  && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+  && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
+  && apt-get update \
+  && apt-get install -y docker-ce \
+  && apt-get clean \
+  && apt-get autoremove \
+  && apt-get autoclean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ 
+RUN curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+  && chmod +x /usr/local/bin/docker-compose 
+ 
+RUN curl -sSLo /tmp/consul.zip https://releases.hashicorp.com/consul/1.2.2/consul_1.2.2_linux_amd64.zip \
+  && unzip -d /bin /tmp/consul.zip && strip /bin/consul && rm -rf /tmp/consul.zip \
+  && mkdir -p /tmp/consul
+
+RUN set -ex \
+  && curl https://releases.rancher.com/cli2/v2.0.5/rancher-linux-amd64-v2.0.5.tar.gz | tar -xz \
+  && cp ./rancher-*/rancher /bin/rancher \
+  && rm -rf rancher-*
 
 WORKDIR /home/app
 
-
+ 
 CMD ["tail", "-f", "/dev/null"]
 
 
