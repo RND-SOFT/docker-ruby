@@ -10,7 +10,7 @@ RUN apt-get update &&\
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |  apt-key add - &&\
   echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list &&\
-  apt-get update &&\
+  apt-get update  &&\
   apt-get -y install google-chrome-stable chromedriver &&\
   wget 'http://sphinxsearch.com/files/sphinxsearch_2.2.11-release-1~jessie_amd64.deb' &&\
   dpkg -i sphinxsearch_2.2.11-release-1~jessie_amd64.deb &&\
