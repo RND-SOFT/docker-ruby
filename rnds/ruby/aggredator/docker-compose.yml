@@ -1,0 +1,9 @@
+version: "2"
+services:
+  ruby-aggredator:
+    build: ./
+    image: rnds/ruby:aggredator
+    working_dir: /home/app
+    
+
+
