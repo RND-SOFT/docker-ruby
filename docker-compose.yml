@@ -17,6 +17,18 @@ services:
       service: ruby-2.3.0-test
     depends_on:
       - ruby-2.3.0
+  
+  ruby-2.5:
+    extends:
+      file: rnds/ruby/2.5/docker-compose.yml
+      service: ruby-2.5
+
+  ruby-2.5-test:
+    extends:
+      file: rnds/ruby/2.5/test/docker-compose.yml
+      service: ruby-2.5-test
+    depends_on:
+      - ruby-2.5
 
   passenger-2.3:
     extends:

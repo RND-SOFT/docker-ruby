@@ -1,0 +1,9 @@
+version: "2"
+services:
+  ruby-2.5-test:
+    build: ./
+    image: rnds/ruby:2.5-test
+    working_dir: /home/app
+    
+
+
