@@ -10,7 +10,8 @@ RUN set -ex \
     ttf-liberation \
     pango \
     proxychains-ng \
-    binutils
+    binutils \
+    openssh-client
 
 ENV CHROMIUM=/usr/bin/chromium-browser
 
@@ -39,7 +40,8 @@ RUN set -ex \
 
 RUN set -ex \
   && gem install docker_toolkit && gem update docker_toolkit \
-  && gem install pronto pronto-rubocop pronto-flay
+  && gem install pronto pronto-rubocop pronto-flay \
+  && gem uninstall unicode-display_width --version '>=1.5.0'
 
 WORKDIR /home/app
 
