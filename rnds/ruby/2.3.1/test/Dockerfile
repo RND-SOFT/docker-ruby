@@ -50,6 +50,12 @@ RUN curl -sSLo /tmp/consul.zip https://releases.hashicorp.com/consul/1.2.2/consu
   && mkdir -p /tmp/consul
 
 RUN set -ex \
+  && apt-get update \
+  && apt-get install -y cmake pkg-config \
+  && gem install pronto pronto-rubocop pronto-flay \
+  && apt-get clean && apt-get autoremove && apt-get autoclean
+
+RUN set -ex \
   && curl https://releases.rancher.com/cli2/v2.0.5/rancher-linux-amd64-v2.0.5.tar.gz | tar -xz \
   && cp ./rancher-*/rancher /bin/rancher \
   && rm -rf rancher-* \
