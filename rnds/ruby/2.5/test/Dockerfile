@@ -22,9 +22,9 @@ RUN set -ex \
   && chmod 777 ${CHROMIUM}
 
 RUN set -ex \
-  && apk add --no-cache docker py-pip python-dev \
+  && apk add --no-cache docker python py-pip python-dev \
   && pip install docker-compose \
-  && apk del python-dev py-pip
+  && apk del py-pip
   
 RUN set -ex \
   && curl -sSLo /tmp/consul.zip https://releases.hashicorp.com/consul/1.2.2/consul_1.2.2_linux_amd64.zip \
@@ -44,7 +44,7 @@ RUN set -ex \
 WORKDIR /home/app
 
  
-CMD ["tail", "-f", "/dev/null"]
+CMD ["/bin/bash"]
 
 
 
