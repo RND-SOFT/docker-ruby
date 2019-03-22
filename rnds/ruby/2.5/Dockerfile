@@ -58,6 +58,11 @@ RUN mkdir -p ~/.ssh && echo "Host * \
   \nStrictHostKeyChecking no  \
   \nUserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
 
+RUN set -ex \
+  && apk add --no-cache \
+    file \
+    file-dev \
+  && rm -rf /var/cache/apk/*
 
 WORKDIR /home/app
 

@@ -41,7 +41,7 @@ RUN set -ex \
 RUN set -ex \
   && gem install docker_toolkit && gem update docker_toolkit \
   && gem install pronto pronto-rubocop pronto-flay \
-  && gem uninstall unicode-display_width --version '>=1.5.0'
+  && gem uninstall unicode-display_width --version '>=1.5.0' || true
 
 WORKDIR /home/app
 
