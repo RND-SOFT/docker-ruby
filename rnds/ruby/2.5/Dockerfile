@@ -42,6 +42,7 @@ RUN set -ex \
     ruby-libs \
     sqlite \
     sqlite-dev \
+    socat \
     tar \
     tzdata \ 
     unixodbc \
