@@ -32,6 +32,7 @@ RUN set -ex \
     ncurses-dev \
     nodejs \
     npm \
+    yarn \
     pkgconfig \
     postgresql-client \
     postgresql-dev \
