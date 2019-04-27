@@ -40,13 +40,14 @@ RUN set -ex \
 
 RUN set -ex \
   && gem install docker_toolkit && gem update docker_toolkit \
-  && gem install pronto pronto-rubocop pronto-flay \
+  && gem install pronto pronto-rubocop pronto-flay json nokogiri gitlab rest-client \
   && gem uninstall unicode-display_width --version '>=1.5.0' || true
   
 RUN set -ex \
   && mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
   
 COPY docker-compose /usr/bin/
+COPY rndslab.rb /usr/bin/
 
 WORKDIR /home/app
 
