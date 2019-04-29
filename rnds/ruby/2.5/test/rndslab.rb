@@ -105,7 +105,12 @@ if @opts[:drop]
   authorize("#{@opts[:gitlab]}/users/sign_in", @opts[:user], @opts[:pass])
 
   project_path = g.project(@opts[:project]).path_with_namespace
-  mr_iid = g.merge_requests(@opts[:project], source_branch: @opts[:mrbranch]).first.iid
+  if mr = g.merge_requests(@opts[:project], source_branch: @opts[:mrbranch]).first
+    mr_iid = mr.iid
+  else
+    puts "Could't found MR '#{@opts[:mrbranch]}' in #{@opts[:project]} project"
+    exit 0
+  end
 
   response = with_cookies do |cookies|
     RestClient.get("#{@opts[:gitlab]}/#{project_path}/merge_requests/#{mr_iid}/discussions.json", cookies: cookies)

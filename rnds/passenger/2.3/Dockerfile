@@ -44,6 +44,8 @@ RUN mkdir -p ~/.ssh && echo "Host * \
   \nStrictHostKeyChecking no \
   \nUserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
 
+RUN find /etc/ImageMagick* -name policy.xml -exec sed -i "/pattern=\"PDF\"/d" {} \;
+
 ENV HOME /root
 
 WORKDIR /home/app
