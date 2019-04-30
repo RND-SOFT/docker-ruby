@@ -44,6 +44,9 @@ RUN set -ex \
   && gem uninstall unicode-display_width --version '>=1.5.0' || true
   
 RUN set -ex \
+  && apk add --no-cache wkhtmltopdf
+  
+RUN set -ex \
   && mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
   
 COPY docker-compose /usr/bin/
