@@ -40,7 +40,7 @@ RUN set -ex \
 
 RUN set -ex \
   && gem install docker_toolkit && gem update docker_toolkit \
-  && gem install pronto pronto-rubocop pronto-flay json nokogiri gitlab rest-client bundler-audit pronto-bundler_audit \
+  && gem install pronto pronto-rubocop rubocop-rails pronto-flay json nokogiri gitlab rest-client bundler-audit pronto-bundler_audit \
   && gem uninstall unicode-display_width --version '>=1.5.0' || true
   
 RUN set -ex \
