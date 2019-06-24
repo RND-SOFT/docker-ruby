@@ -43,6 +43,11 @@ parser = OptionParser.new do |o|
   o.on('--drop-comments', 'Remove all comments in current MR') do
     @opts[:drop] = true
   end
+  
+  o.on('--badge <badge>', 'Generate badge "script||text||color||link||id"') do |badge|
+    @opts[:badges] ||= []
+    @opts[:badges] << badge
+  end
 end
 
 parser.parse!
@@ -65,7 +70,7 @@ rescue RestClient::ExceptionWithResponse => e
   response
 end
 
-g = Gitlab.client
+$g = g = Gitlab.client
 @current_user = g.user
 
 def authorize url, login, password
@@ -127,6 +132,23 @@ if @opts[:drop]
     end
   end
 
+  exit 0
+end
+
+def update_badge project, badge
+  script, text, color, link, id = badge.split('||')
+  
+  value = `#{script}`.strip.split("\n").first.strip
+  image_url="https://badgen.net/badge/#{text.gsub(' ', '%20')}/#{value.gsub(' ', '%20')}/#{color}"
+  $g.edit_project_badge(project, id, link_url: link, image_url: image_url)
+end
+
+if @opts[:badges].any?
+  raise 'project not defined' if @opts[:project].to_s.empty?
+  
+  @opts[:badges].each do |badge|
+    update_badge @opts[:project], badge
+  end
   exit 0
 end
 
