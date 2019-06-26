@@ -40,11 +40,14 @@ RUN set -ex \
 
 RUN set -ex \
   && gem install docker_toolkit && gem update docker_toolkit \
-  && gem install pronto pronto-rubocop rubocop-rails pronto-flay json nokogiri gitlab rest-client bundler-audit pronto-bundler_audit \
+  && gem install pronto pronto-rubocop rubocop-rails pronto-flay json nokogiri gitlab rest-client bundler-audit pronto-bundler_audit rubycritic \
   && gem uninstall unicode-display_width --version '>=1.5.0' || true
   
 RUN set -ex \
   && apk add --no-cache wkhtmltopdf
+  
+RUN set -ex \
+  && gem install aggkit && gem update aggkit
   
 RUN set -ex \
   && mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
