@@ -1,6 +1,6 @@
 version: "2"
 services:
-
+ 
   gitlab-runner:
     extends:
       file: rnds/gitlab-runner/docker-compose.yml
