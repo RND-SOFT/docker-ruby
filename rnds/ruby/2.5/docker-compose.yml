@@ -1,8 +1,17 @@
 version: "2"
 services:
   ruby-2.5:
-    build: ./
+    build: 
+      context: ./
+      dockerfile: Dockerfile.alpine
     image: rnds/ruby:2.5
+    working_dir: /home/app
+    
+  ruby-2.5-debian:
+    build:
+      context: ./
+      dockerfile: Dockerfile.debian
+    image: rnds/ruby:2.5-debian
     working_dir: /home/app
     
 

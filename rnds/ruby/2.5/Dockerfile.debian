@@ -1,0 +1,29 @@
+FROM ruby:2.5-slim
+
+RUN apt-get update && apt-get upgrade -y &&\
+  apt-get -y install libxext6 libxrender1 curl wget git build-essential &&\
+  apt-get clean &&\
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN apt-get update &&\
+  apt-get -y install unixodbc libpq5 libsqlite3-dev libpq-dev nodejs npm imagemagick wkhtmltopdf gcc make &&\
+  npm install uglify-js -g &&\
+  apt-get clean &&\
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+RUN echo 'gem: --no-document' > ~/.gemrc &&\
+  gem install bundler --no-document && gem update bundler --no-document
+
+RUN mkdir -p ~/.ssh && echo "Host * \
+  \nStrictHostKeyChecking no  \
+  \nUserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
+
+RUN find /etc/ImageMagick* -name policy.xml -exec sed -i "/pattern=\"PDF\"/d" {} \;
+
+WORKDIR /home/app
+
+CMD ["/bin/bash"]
+
+
+
