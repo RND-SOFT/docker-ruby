@@ -1,15 +1,23 @@
 FROM ruby:2.5-slim
 
-RUN apt-get update && apt-get upgrade -y &&\
-  apt-get -y install libxext6 libxrender1 curl wget git build-essential gcc make nodejs npm imagemagick wkhtmltopdf &&\
-  npm install uglify-js -g &&\
-  apt-get clean &&\
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN set -ex \
+  && apt-get update && apt-get upgrade -y \
+  && apt-get -y install libxext6 libxrender1 curl wget git build-essential gcc make nodejs npm imagemagick \
+  && npm install uglify-js -g \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN apt-get update &&\
-  apt-get -y install unixodbc libpq5 libsqlite3-dev libpq-dev gettext-base &&\
-  apt-get clean &&\
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN set -ex \
+  && apt-get update \
+  && apt-get -y install unixodbc libpq5 libsqlite3-dev libpq-dev gettext-base fonts-freefont-otf fonts-freefont-ttf t1-cyrillic fonts-liberation \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  
+RUN set -ex \
+  && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
+  && tar xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
+  && mv wkhtmltox/bin/wkhtmlto* /usr/bin/ \
+  && ln -nfs /usr/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
   
 
 RUN echo 'gem: --no-document' > ~/.gemrc &&\
