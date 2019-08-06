@@ -27,6 +27,10 @@ parser = OptionParser.new do |o|
   o.on('-j', '--project PROJECT', 'Gitlab project number') do |project|
     @opts[:project] = project.strip
   end
+  
+  o.on('--list PREFIX', 'list project names started with NAMESAPCE') do |list|
+    @opts[:list] = list.strip
+  end
 
   o.on('--mr-branch MR', 'Gitlab merge request source branch') do |mrbranch|
     @opts[:mrbranch] = mrbranch.strip
@@ -98,6 +102,23 @@ def authorize url, login, password
   $auth_token = xml.search('meta[name="csrf-token"]').attribute('content').value
 
   response
+end
+
+if (ns = @opts[:list])
+
+  list = Enumerator.new do |y|
+    (1..3).each do |page|
+      Gitlab.projects(per_page: 1000, page: page).each do |p|
+        y << p if p.path_with_namespace.downcase.start_with?(ns.downcase)
+      end
+    end
+  end
+
+  list.map{|p| p.path_with_namespace}.sort.uniq.each do |name|
+    puts name
+  end
+
+  exit 0
 end
 
 if @opts[:drop]
