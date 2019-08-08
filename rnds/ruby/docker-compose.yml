@@ -41,7 +41,18 @@ services:
       file: 2.5/docker-compose.yml
       service: ruby-2.5-debian
 
-      
+  ruby-2.6:
+    extends:
+      file: 2.6/docker-compose.yml
+      service: ruby-2.6
+
+  ruby-2.6-test:
+    extends:
+      file: 2.6/test/docker-compose.yml
+      service: ruby-2.6-test
+    depends_on:
+      - ruby-2.6
+
   ruby-aggredator:
     extends:
       file: aggredator/docker-compose.yml

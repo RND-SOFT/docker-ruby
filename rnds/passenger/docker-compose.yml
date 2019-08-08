@@ -20,6 +20,26 @@ services:
       - passenger-2.3-cap
     
 
+  passenger-2.6:
+    extends:
+      file: 2.6/docker-compose.yml
+      service: passenger-2.6
+
+  passenger-2.6-cap:
+    extends:
+      file: 2.6/cap/docker-compose.yml
+      service: passenger-2.6-cap
+    depends_on:
+      - passenger-2.6
+    
+  passenger-2.6-gen:
+    extends:
+      file: 2.6/cap/gen/docker-compose.yml
+      service: passenger-2.6-gen
+    depends_on:
+      - passenger-2.6-cap
+    
+
   passenger-slim:
     extends:
       file: slim/docker-compose.yml
