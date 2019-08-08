@@ -1,9 +1,0 @@
-#!/bin/bash
-
-trap 'kill $(jobs -p)' EXIT
-socat TCP-LISTEN:56789,reuseaddr,fork UNIX-CLIENT:${SSH_AUTH_SOCK} &
-
-export BUILDHOST=`hostname`
-export BUILDHOST=`getent hosts ${BUILDHOST} | cut -d' ' -f1`
-
-/usr/bin/docker-compose.orig $@

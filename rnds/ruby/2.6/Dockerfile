@@ -1,70 +1,25 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.6-slim
+MAINTAINER Firmhouse "kinnalru@gmail.com"
 
-RUN set -ex \
-  && apk add --no-cache \
-    autoconf \
-    bash \
-    bison \
-    bzip2 \
-    bzip2-dev \
-    ca-certificates \
-    cmake \
-    coreutils \
-    curl \
-    dpkg-dev dpkg \
-    g++ \
-    gcc \
-    gdbm-dev \
-    git \
-    glib-dev \
-    imagemagick \
-    libc-dev \
-    libffi-dev \
-    libxext \
-    libxml2-dev \
-    libxrender \
-    libxslt-dev \
-    linux-headers \
-    make \
-    make \
-    mysql-client \
-    mysql-dev \
-    ncurses-dev \
-    nodejs \
-    npm \
-    yarn \
-    pkgconfig \
-    postgresql-client \
-    postgresql-dev \
-    procps \
-    readline-dev \
-    ruby-dev \
-    ruby-libs \
-    sqlite \
-    sqlite-dev \
-    socat \
-    tar \
-    tzdata \ 
-    unixodbc \
-    unixodbc-dev \
-    wget \
-    xz \
-    yaml-dev \
-    zlib-dev \
-  && npm install -g uglify-js \
-  && echo 'gem: --no-ri --no-rdoc' > ~/.gemrc \
-  && gem install bundler --no-document \
-  && rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get upgrade -y &&\
+  apt-get -y install libxext6 libxrender1 curl wget git build-essential &&\
+  apt-get clean &&\
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN apt-get update &&\
+  apt-get -y install mariadb-client unixodbc libpq5 libmariadb-dev libsqlite3-dev libpq-dev nodejs npm imagemagick  &&\
+  npm install uglify-js -g &&\
+  apt-get clean &&\
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+RUN gem install bundler
 
 RUN mkdir -p ~/.ssh && echo "Host * \
   \nStrictHostKeyChecking no  \
   \nUserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
 
-RUN set -ex \
-  && apk add --no-cache \
-    file \
-    file-dev \
-  && rm -rf /var/cache/apk/*
+RUN find /etc/ImageMagick* -name policy.xml -exec sed -i "/pattern=\"PDF\"/d" {} \;
 
 WORKDIR /home/app
 
