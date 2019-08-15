@@ -3,7 +3,7 @@ FROM ruby:2.5-alpine
 RUN set -ex \
   && apk add --no-cache \
     autoconf \
-    bash \
+    bash  \
     bison \
     bzip2 \
     bzip2-dev \
