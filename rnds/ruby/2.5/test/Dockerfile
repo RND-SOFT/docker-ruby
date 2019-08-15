@@ -44,7 +44,7 @@ RUN set -ex \
   && gem uninstall unicode-display_width --version '>=1.5.0' || true
   
 RUN set -ex \
-  && apk add --no-cache wkhtmltopdf
+  && apk add --no-cache wkhtmltopdf libreoffice-writer
   
 RUN set -ex \
   && gem install aggkit && gem update aggkit
