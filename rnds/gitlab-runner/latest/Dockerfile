@@ -1,4 +1,4 @@
-FROM docker:18.03
+FROM docker:stable
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 WORKDIR /home/app
@@ -59,7 +59,8 @@ RUN set -ex \
     glib-dev \
     libc-dev \
     yaml-dev \
-    zlib-dev
+    zlib-dev \
+    ansible
 
 
 RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc \
@@ -82,7 +83,7 @@ COPY docker-compose /usr/bin/
 RUN chmod +x /usr/bin/docker-compose
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
-                httparty bundler socksify net-ssh io-console --no-ri --no-rdoc
+                httparty bundler socksify net-ssh io-console etc --no-ri --no-rdoc
 
 CMD ["/bin/bash"]
 
