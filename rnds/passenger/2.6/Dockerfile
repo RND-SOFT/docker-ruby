@@ -47,8 +47,6 @@ RUN mkdir -p ~/.ssh && echo "Host * \
 
 RUN find /etc/ImageMagick* -name policy.xml -exec sed -i "/pattern=\"PDF\"/d" {} \;
 
-ENV HOME /root
-
 WORKDIR /home/app
 
 CMD ["/sbin/my_init"]
