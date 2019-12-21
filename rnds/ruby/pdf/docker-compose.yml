@@ -1,0 +1,11 @@
+version: "2"
+services:
+  ruby-2.5-pdf:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    image: rnds/rubypdf:2.5
+    working_dir: /home/app
+    
+
+
