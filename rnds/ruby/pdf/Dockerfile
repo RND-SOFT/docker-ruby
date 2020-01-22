@@ -6,7 +6,8 @@ RUN mkdir -p ~/.ssh && echo "Host * \
 
 RUN set -ex \
   && apt-get update && apt-get upgrade -y \
-  && apt-get -y install libxext6 libxrender1 curl wget imagemagick \
+  && apt-get -y install --no-install-recommends --no-install-suggests \
+    libxext6 libxrender1 curl wget imagemagick \
     unixodbc libpq5 libsqlite3-dev libpq-dev \
     gettext-base \
     xz-utils \
@@ -25,23 +26,22 @@ RUN set -ex \
   && rm -rf wkhtmltox*
 
 WORKDIR /home/app
-ADD Gemfile Gemfile.lock /home/app/
-RUN echo 'gem: --no-document' > ~/.gemrc &&\
-  gem install bundler --no-document && gem update bundler --no-document
+RUN echo 'gem: --no-document' > ~/.gemrc
 
 RUN set -ex \
   && apt-get -y update \
-  && apt-get -y install build-essential \
-  && bundle install \
-  && apt-get -y remove build-essential \
-  && apt -y autoremove \
+  && apt-get -y install --no-install-recommends --no-install-suggests build-essential locales \
+  && echo ru_RU.UTF-8 UTF-8 >> /etc/locale.gen \
+  && dpkg-reconfigure locales && locale-gen \
+  && gem install gimli && gem update gimli \
+  && apt-get purge -y --auto-remove build-essential \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN set -ex \
   && echo deb http://deb.debian.org/debian buster main contrib non-free >> /etc/apt/sources.list \
   && apt-get -y update \
-  && apt-get -y install \
+  && apt-get -y install --no-install-recommends --no-install-suggests build-essential \
     fonts-freefont-otf fonts-freefont-ttf t1-cyrillic fonts-liberation  \
     fonts-cantarell ttf-mscorefonts-installer \
   && dpkg-reconfigure fontconfig \
@@ -49,13 +49,17 @@ RUN set -ex \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
   
+ENV LC_ALL=ru_RU.UTF-8
+ENV LANG=ru_RU.UTF-8
 
-ADD fixgimli.sh /home/app/
+
+run locale
+  
+
+ADD fixgimli.sh makepdf.sh /usr/bin/
 
 RUN set -ex \
-  && bundle exec ./fixgimli.sh
-
-ENTRYPOINT ["bundle", "exec"]
+  && fixgimli.sh
 
 CMD ["/bin/bash"]
 
