@@ -1,9 +1,19 @@
 version: "2"
 services:
   ruby-2.6:
-    build: ./
+    build: 
+      context: ./
+      dockerfile: Dockerfile.debian
     image: rnds/ruby:2.6
     working_dir: /home/app
+    
+  ruby-2.6-test:
+    extends:
+      file: test/docker-compose.yml
+      service: ruby-2.6-test
+    depends_on:
+      - ruby-2.6
+    
     
 
 

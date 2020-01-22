@@ -1,9 +1,12 @@
 version: "2"
 services:
   ruby-2.6-test:
-    build: ./
+    build: 
+      context: ./
+      dockerfile: Dockerfile.debian
     image: rnds/ruby:2.6-test
     working_dir: /home/app
+    
     
 
 
