@@ -21,5 +21,7 @@ echo "  DATE:    ${DATE}"
 echo "  SERVICE: ${SERVICE}"
 
 echo "EXEC: "
-echo gimli  -w "--header-html header.html --footer-html footer.html -L 15mm -R 15mm cover cover.html" $@
-exec gimli  -w "--header-html header.html --footer-html footer.html -L 15mm -R 15mm cover cover.html" $@
+#echo gimli -w "--header-html header.html --footer-html footer.html -L 15mm -R 15mm cover cover.html" $@
+#exec gimli -w "--header-html header.html --footer-html footer.html -L 15mm -R 15mm cover cover.html" $@
+echo gimli -w "--header-html header.html --footer-html footer.html -L 15mm -R 15mm cover cover.html toc --toc-header-text 'Оглавление' --toc-text-size-shrink 1 " $@
+exec gimli -w "--header-html header.html --footer-html footer.html -L 15mm -R 15mm cover cover.html toc --toc-header-text 'Оглавление' --toc-text-size-shrink 1 " $@
