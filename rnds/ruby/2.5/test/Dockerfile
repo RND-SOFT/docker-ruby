@@ -47,7 +47,8 @@ RUN set -ex \
   && apk add --no-cache wkhtmltopdf libreoffice-writer
   
 RUN set -ex \
-  && gem install aggkit && gem update aggkit
+  && gem install aggkit && gem update aggkit \
+  && gem install nexus && gem update nexus
   
 RUN set -ex \
   && mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
