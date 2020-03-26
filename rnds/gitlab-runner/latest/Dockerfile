@@ -63,9 +63,9 @@ RUN set -ex \
     ansible
 
 
-RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc \
-  && gem install docker_toolkit --no-ri --no-rdoc \
-  && gem update docker_toolkit --no-ri --no-rdoc
+RUN echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc \
+  && gem install docker_toolkit && gem update docker_toolkit \
+  && gem install aggkit && gem update aggkit
 
 RUN set -ex \
   && apk add --no-cache \
@@ -74,7 +74,7 @@ RUN set -ex \
     py-setuptools
 
 RUN set -ex \
-  && easy_install-2.7 pip && pip install docker-compose==1.20.1
+  && easy_install-2.7 pip && pip install docker-compose==1.25.1
 
 RUN mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
 
@@ -83,7 +83,9 @@ COPY docker-compose /usr/bin/
 RUN chmod +x /usr/bin/docker-compose
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
-                httparty bundler socksify net-ssh io-console etc --no-ri --no-rdoc
+  httparty bundler socksify net-ssh io-console etc
+
+COPY docker-compose pullcache.sh pushcache.sh /usr/bin/
 
 CMD ["/bin/bash"]
 
