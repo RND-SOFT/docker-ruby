@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link media="all" rel="stylesheet" href="/home/common/style.css" />
+  </head>
+  <body class="cover">
+    <div class="cover-image">
+      <img src="/home/common/images/logo.png"></img>
+    </div>
+    <div class="cover-text">
+      <div class="cover-title">${DOC_TITLE}</div>
+      <div>${DOC_SUBTITLE}</div>
+      <br>
+      <div class="cover-version">Версия ${VERSION}</div>
+    </div>
+  </body>
+</html>
+

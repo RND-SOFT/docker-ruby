@@ -1,0 +1,96 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 20pt;
+  font-weight: bold;
+  text-align: center;
+}
+
+h2 {
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+code {
+  font-family: Arial;
+  font-size: 12pt;
+  color: inherit;
+}
+
+body {
+  padding-left: 0.5cm;
+  padding-right: 0.5cm;
+  
+  /* padding-top: 1.56cm; */
+  /* margin: 0; */
+  line-height: 1.15;
+
+  font-family:  "Arial";
+  font-size: 12pt;
+  font-weight: 500;
+
+  line-height: 1.15;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+
+
+.history {
+  width: 100%;
+  font-size: 12pt;
+  white-space: nowrap;
+}
+
+.history th {
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  font-size: 12pt;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+table th {
+  font-weight: bold;
+}
+
+.code {
+  font-size: 12pt;
+}
+
+
+img {
+  max-width: 100%;
+}

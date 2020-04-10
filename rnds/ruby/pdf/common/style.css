@@ -1,0 +1,110 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding-left: 0.5cm;
+  padding-right: 0.5cm;
+  
+  margin: 0;
+  line-height: 1.15;
+
+  font-family:  "Arial";
+  font-size: 12pt;
+  font-weight: 500;
+
+  line-height: 1.15;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+
+
+.cover {
+  text-align: right;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+.cover-image {
+  margin: 0;
+  text-align: right;
+  height: 1.27cm;
+  margin: 0;
+  padding: 0;
+}
+
+.cover-image img {
+  width: 6.52cm;
+  vertical-align: bottom;
+}
+
+.cover-container {
+  width: 100%;
+  margin-top: 400px;
+  font-size: 18px;
+}
+
+.cover-text {
+  width: 100%;
+  margin-top: 200px;
+  font-size: 14pt;
+  text-align: right;
+}
+
+.cover-title {
+  font-size: 30pt;
+}
+
+.cover-version {
+  font-weight: bold;
+}
+
+.header {
+  padding-bottom: 2.56cm;
+}
+
+.footer {
+  margin: 0;
+  padding-top: 18px;
+}
+
+.footer table {
+  width: 100%;
+}
+
+.footer td {
+  font-size: 10pt;
+  white-space: nowrap;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-center {
+  width: 100%;
+  text-align: center;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.history {
+  width: 100%;
+  font-size: 12pt;
+  white-space: nowrap;
+}
+
+.history th {
+  font-weight: bold;
+}
+
+img {
+  max-width: 100%;
+}

@@ -1,3 +1,12 @@
+FROM ruby:2.5-slim as build
+
+ARG PRIVATE_REPO
+
+WORKDIR /home/app
+
+RUN echo "source 'https://rubygems.org'\nsource '${PRIVATE_REPO}' do \n gem 'gimli' end \n " > Gemfile \
+  && bundle package --all --no-install
+
 FROM ruby:2.5-slim
 
 RUN mkdir -p ~/.ssh && echo "Host * \
@@ -33,7 +42,7 @@ RUN set -ex \
   && apt-get -y install --no-install-recommends --no-install-suggests build-essential locales \
   && echo ru_RU.UTF-8 UTF-8 >> /etc/locale.gen \
   && dpkg-reconfigure locales && locale-gen \
-  && gem install gimli && gem update gimli \
+  # && gem install gimli && gem update gimli \
   && apt-get purge -y --auto-remove build-essential \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -49,17 +58,26 @@ RUN set -ex \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
   
+
+COPY --from=build /home/app/vendor/cache /home/app/vendor/cache
+
+RUN set -ex \
+  && gem install /home/app/vendor/cache/gimli-*.gem \
+  && rm -rf /home/app/vendor
+
 ENV LC_ALL=ru_RU.UTF-8
 ENV LANG=ru_RU.UTF-8
+ENV COVER_PATH=/home/common/cover.html.in
+ENV HEADER_PATH=/home/common/header.html.in
+ENV FOOTER_PATH=/home/common/footer.html.in
 
 
 run locale
-  
 
-ADD fixgimli.sh makepdf.sh /usr/bin/
+ADD example /home/example/
+ADD common /home/common/
 
-RUN set -ex \
-  && fixgimli.sh
+ADD make_example.sh makepdf.sh /usr/bin/
 
 CMD ["/bin/bash"]
 
