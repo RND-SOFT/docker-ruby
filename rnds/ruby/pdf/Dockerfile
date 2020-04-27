@@ -4,7 +4,8 @@ ARG PRIVATE_REPO
 
 WORKDIR /home/app
 
-RUN echo "source 'https://rubygems.org'\nsource '${PRIVATE_REPO}' do \n gem 'gimli' end \n " > Gemfile \
+RUN echo "source 'https://rubygems.org'\nsource '${PRIVATE_REPO}' do \n gem 'gimli' \n end \n " > Gemfile \
+  && cat Gemfile \
   && bundle package --all --no-install
 
 FROM ruby:2.5-slim
