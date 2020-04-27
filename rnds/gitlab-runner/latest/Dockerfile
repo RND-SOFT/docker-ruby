@@ -83,7 +83,8 @@ COPY docker-compose /usr/bin/
 RUN chmod +x /usr/bin/docker-compose
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
-  httparty bundler bundle-audit socksify net-ssh io-console etc
+  httparty bundler bundler-audit socksify net-ssh io-console etc \
+  pronto pronto-rubocop rubocop-rails pronto-flay nokogiri gitlab rest-client rubycritic
 
 COPY docker-compose pullcache.sh pushcache.sh /usr/bin/
 
