@@ -4,7 +4,6 @@ set -e
 
 [ -z "$CI_COMMIT_SHORT_SHA" ] && export CI_COMMIT_SHORT_SHA=unknown
 [ -z "$VERSION" ] && export VERSION="1.0(${CI_COMMIT_SHORT_SHA})"
-[ -z "$SERVICE" ] && export SERVICE="API-шлюз"
 [ -z "$DOC_TITLE"] && export DOC_TITLE="SERVICE"
 [ -z "$DOC_SUBTITLE"] && export DOC_SUBTITLE="description"
 
@@ -27,7 +26,6 @@ echo Processing: $@
 echo "  VERSION:      ${VERSION}"
 echo "  YEAR:         ${YEAR}"
 echo "  DATE:         ${DATE}"
-echo "  SERVICE:      ${SERVICE}"
 echo "  DOC_TITLE:    ${DOC_TITLE}"
 echo "  DOC_SUBTITLE: ${DOC_SUBTITLE}"
 echo "  EXTRA_STYLES: ${GIMLI_EXTRA_STYLES}"
