@@ -322,6 +322,7 @@ table {
   font-size: 12pt;
   margin-top: 0.5em;
   margin-bottom: 1em;
+  border-collapse: collapse;
 }
 
 table th {
