@@ -4,8 +4,8 @@ set -e
 
 [ -z "$CI_COMMIT_SHORT_SHA" ] && export CI_COMMIT_SHORT_SHA=unknown
 [ -z "$VERSION" ] && export VERSION="1.0(${CI_COMMIT_SHORT_SHA})"
-[ -z "$DOC_TITLE"] && export DOC_TITLE="SERVICE"
-[ -z "$DOC_SUBTITLE"] && export DOC_SUBTITLE="description"
+[ -z "$DOC_TITLE" ] && export DOC_TITLE="SERVICE"
+[ -z "$DOC_SUBTITLE" ] && export DOC_SUBTITLE="description"
 
 export YEAR=`date +%Y`
 export DATE=`date +%d.%m.%Y`
