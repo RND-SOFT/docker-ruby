@@ -31,5 +31,10 @@ echo "  DOC_SUBTITLE: ${DOC_SUBTITLE}"
 echo "  EXTRA_STYLES: ${GIMLI_EXTRA_STYLES}"
 
 echo "EXEC: "
-echo gimli -w "--header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html" $@
-exec gimli -w "--header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html" $@
+if [ -z $DISABLE_TOC ]; then
+  echo gimli -w "--disable-smart-shrinking --header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html" $@
+  exec gimli -w "--disable-smart-shrinking --header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html" $@
+else
+  echo gimli -w "--disable-smart-shrinking --header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html toc --toc-header-text '${TOC_HEADER}' --toc-text-size-shrink 1 --toc-level-indentation 0 --disable-dotted-lines" $@
+  exec gimli -w "--disable-smart-shrinking --header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html toc --toc-header-text '${TOC_HEADER}' --toc-text-size-shrink 1 --toc-level-indentation 0 --disable-dotted-lines" $@
+fi
