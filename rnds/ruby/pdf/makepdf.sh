@@ -31,5 +31,5 @@ echo "  DOC_SUBTITLE: ${DOC_SUBTITLE}"
 echo "  EXTRA_STYLES: ${GIMLI_EXTRA_STYLES}"
 
 echo "EXEC: "
-echo gimli -w "--disable-smart-shrinking --header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html --disable-dotted-lines" $@
-exec gimli -w "--disable-smart-shrinking --header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html --disable-dotted-lines" $@
+echo gimli -w "--header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html" $@
+exec gimli -w "--header-html header.html --footer-html footer.html -T ${TOP_MARGIN} -B ${BOTTOM_MARGIN} -L ${LEFT_MARGIN} -R ${RIGHT_MARGIN} cover cover.html" $@
