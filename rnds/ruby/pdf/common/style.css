@@ -337,3 +337,7 @@ table th {
 img {
   max-width: 100%;
 }
+
+.section {
+  margin-bottom: 50px;
+}
