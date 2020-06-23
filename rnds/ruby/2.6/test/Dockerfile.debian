@@ -40,9 +40,6 @@ RUN set -ex \
   && echo "exec ${CHROME}.orig --no-sandbox --disable-gpu --disable-sandbox --user-data-dir=/tmp/ \$@" >> ${CHROME} \
   && chmod 777 ${CHROME}
 
-RUN gem install docker_toolkit && gem update docker_toolkit
-RUN gem install aggkit && gem update aggkit
-
 COPY --from=consul:1.6.2 /bin/consul /bin
 
 RUN set -ex \
@@ -51,7 +48,18 @@ RUN set -ex \
   && gem install pronto pronto-rubocop pronto-flay \
   && apt-get clean && apt-get autoremove && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-  
+
+RUN set -ex \
+  && gem install docker_toolkit && gem update  docker_toolkit \
+  && gem install pronto pronto-rubocop rubocop-rails pronto-flay json nokogiri gitlab rest-client bundler-audit rubycritic \
+  && gem uninstall unicode-display_width --version '>=1.5.0' || true
+
+RUN set -ex \
+  && gem install aggkit && gem update aggkit \
+  && gem install nexus && gem update nexus \
+  && gem install bundler && gem update bundler \
+  && gem install bundler-audit && gem update bundler-audit \
+  && gem install yard && gem update yard  
 
 RUN set -ex \
   && curl https://releases.rancher.com/cli2/v2.0.5/rancher-linux-amd64-v2.0.5.tar.gz | tar -xz \
