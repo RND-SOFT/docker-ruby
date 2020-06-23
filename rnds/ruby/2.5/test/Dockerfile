@@ -48,7 +48,9 @@ RUN set -ex \
   
 RUN set -ex \
   && gem install aggkit && gem update aggkit \
-  && gem install nexus && gem update nexus
+  && gem install nexus && gem update nexus \
+  && gem install bundler && gem update bundler \
+  && gem install bundler-audit && gem update bundler-audit
   
 RUN set -ex \
   && mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
