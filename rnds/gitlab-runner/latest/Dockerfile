@@ -27,7 +27,8 @@ RUN set -ex \
     sqlite-dev \
     libxml2 \
     wget \
-    python \
+    python3 \
+    jq \
     curl \
     libcurl \
     curl-dev \
@@ -51,6 +52,7 @@ RUN set -ex \
     procps \
     readline-dev \
     make \
+    cmake \
     gcc \
     g++ \
     ruby \
@@ -70,11 +72,12 @@ RUN echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc \
 RUN set -ex \
   && apk add --no-cache \
     nodejs \
-    python-dev \
+    python3-dev \
+    py3-pip \
     py-setuptools
 
 RUN set -ex \
-  && easy_install-2.7 pip && pip install docker-compose==1.25.1
+  && pip install --ignore-installed PyYAML && pip install docker-compose==1.25.1
 
 RUN mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
 
