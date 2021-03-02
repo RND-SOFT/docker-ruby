@@ -76,21 +76,22 @@ RUN set -ex \
     py3-pip \
     py-setuptools
 
-RUN set -ex \
-  && pip install --ignore-installed PyYAML && pip install docker-compose==1.28.5
-
-RUN mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
-
-COPY docker-compose /usr/bin/
-COPY docker-compose /usr/local/bin/
-
 RUN gem install rspec activesupport bigdecimal json awesome_print \
   httparty bundler bundler-audit socksify net-ssh io-console etc \
   pronto pronto-rubocop rubocop-rails pronto-flay nokogiri gitlab rest-client rubycritic
 
-COPY docker-compose pullcache.sh pushcache.sh /usr/bin/
+COPY pullcache.sh pushcache.sh /usr/bin/
+
+COPY  --from=docker/compose:alpine-1.28.5 /usr/local/bin/docker-compose /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+RUN cp -f /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+RUN mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
+COPY docker-compose /usr/bin/
+COPY docker-compose /usr/local/bin/
 
 RUN chmod +x /usr/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
 
 CMD ["/bin/bash"]
 
