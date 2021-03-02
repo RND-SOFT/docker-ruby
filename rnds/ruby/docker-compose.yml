@@ -1,28 +1,28 @@
 version: "2"
 services:
-  ruby-2.3.0:
-    extends:
-      file: 2.3.0/docker-compose.yml
-      service: ruby-2.3.0
+  # ruby-2.3.0:
+  #   extends:
+  #     file: 2.3.0/docker-compose.yml
+  #     service: ruby-2.3.0
 
-  ruby-2.3.0-test:
-    extends:
-      file: 2.3.0/test/docker-compose.yml
-      service: ruby-2.3.0-test
-    depends_on:
-      - ruby-2.3.0
+  # ruby-2.3.0-test:
+  #   extends:
+  #     file: 2.3.0/test/docker-compose.yml
+  #     service: ruby-2.3.0-test
+  #   depends_on:
+  #     - ruby-2.3.0
       
-  ruby-2.3.1:
-    extends:
-      file: 2.3.1/docker-compose.yml
-      service: ruby-2.3.1
+  # ruby-2.3.1:
+  #   extends:
+  #     file: 2.3.1/docker-compose.yml
+  #     service: ruby-2.3.1
 
-  ruby-2.3.1-test:
-    extends:
-      file: 2.3.1/test/docker-compose.yml
-      service: ruby-2.3.1-test
-    depends_on:
-      - ruby-2.3.1
+  # ruby-2.3.1-test:
+  #   extends:
+  #     file: 2.3.1/test/docker-compose.yml
+  #     service: ruby-2.3.1-test
+  #   depends_on:
+  #     - ruby-2.3.1
       
   ruby-2.5:
     extends:

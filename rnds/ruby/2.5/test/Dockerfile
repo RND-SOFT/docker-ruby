@@ -23,10 +23,16 @@ RUN set -ex \
   && chmod 777 ${CHROMIUM}
 
 RUN set -ex \
-  && apk add --no-cache docker python py-pip python-dev \
-  && pip install docker-compose \
-  && apk del py-pip
+  && apk add --no-cache docker python python-dev
+
+
+COPY  --from=docker/compose:alpine-1.28.5 /usr/local/bin/docker-compose /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+RUN cp -f /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+RUN docker-compose -version
   
+
 RUN set -ex \
   && curl -sSLo /tmp/consul.zip https://releases.hashicorp.com/consul/1.2.2/consul_1.2.2_linux_amd64.zip \
   && unzip -d /bin /tmp/consul.zip && strip /bin/consul && rm -rf /tmp/consul.zip \
@@ -39,7 +45,6 @@ RUN set -ex \
   && chmod +x /bin/kubectl
 
 RUN set -ex \
-  && gem install docker_toolkit && gem update  docker_toolkit \
   && gem install pronto pronto-rubocop rubocop-rails pronto-flay json nokogiri gitlab rest-client bundler-audit rubycritic \
   && gem uninstall unicode-display_width --version '>=1.5.0' || true
   
@@ -57,6 +62,7 @@ RUN set -ex \
   && mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
   
 COPY docker-compose /usr/bin/
+COPY docker-compose /usr/local/bin/
 COPY rndslab.rb /usr/bin/
 
 WORKDIR /home/app

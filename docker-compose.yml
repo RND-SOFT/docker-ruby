@@ -6,17 +6,17 @@ services:
       file: rnds/gitlab-runner/docker-compose.yml
       service: gitlab-runner
 
-  ruby-2.3.0:
-    extends:
-      file: rnds/ruby/2.3.0/docker-compose.yml
-      service: ruby-2.3.0
+  # ruby-2.3.0:
+  #   extends:
+  #     file: rnds/ruby/2.3.0/docker-compose.yml
+  #     service: ruby-2.3.0
 
-  ruby-2.3.0-test:
-    extends:
-      file: rnds/ruby/2.3.0/test/docker-compose.yml
-      service: ruby-2.3.0-test
-    depends_on:
-      - ruby-2.3.0
+  # ruby-2.3.0-test:
+  #   extends:
+  #     file: rnds/ruby/2.3.0/test/docker-compose.yml
+  #     service: ruby-2.3.0-test
+  #   depends_on:
+  #     - ruby-2.3.0
   
   ruby-2.5:
     extends:
@@ -30,34 +30,34 @@ services:
     depends_on:
       - ruby-2.5
 
-  passenger-2.3:
-    extends:
-      file: rnds/passenger/2.3/docker-compose.yml
-      service: passenger-2.3
+  # passenger-2.3:
+  #   extends:
+  #     file: rnds/passenger/2.3/docker-compose.yml
+  #     service: passenger-2.3
 
-  passenger-2.3-cap:
-    extends:
-      file: rnds/passenger/2.3/cap/docker-compose.yml
-      service: passenger-2.3-cap
-    depends_on:
-      - passenger-2.3
+  # passenger-2.3-cap:
+  #   extends:
+  #     file: rnds/passenger/2.3/cap/docker-compose.yml
+  #     service: passenger-2.3-cap
+  #   depends_on:
+  #     - passenger-2.3
     
-  passenger-2.3-gen:
-    extends:
-      file: rnds/passenger/2.3/cap/gen/docker-compose.yml
-      service: passenger-2.3-gen
-    depends_on:
-      - passenger-2.3-cap
+  # passenger-2.3-gen:
+  #   extends:
+  #     file: rnds/passenger/2.3/cap/gen/docker-compose.yml
+  #     service: passenger-2.3-gen
+  #   depends_on:
+  #     - passenger-2.3-cap
 
 
-  passenger-slim:
-    extends:
-      file: rnds/passenger/slim/docker-compose.yml
-      service: passenger-slim
+  # passenger-slim:
+  #   extends:
+  #     file: rnds/passenger/slim/docker-compose.yml
+  #     service: passenger-slim
 
-  passenger-slim-build:
-    extends:
-      file: rnds/passenger/slim/build/docker-compose.yml
-      service: passenger-slim-build
-    depends_on:
-      - passenger-slim
+  # passenger-slim-build:
+  #   extends:
+  #     file: rnds/passenger/slim/build/docker-compose.yml
+  #     service: passenger-slim-build
+  #   depends_on:
+  #     - passenger-slim

@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade -y \
 
 RUN apt-get update \
   && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-  && apt-get -y install mysql-client unixodbc libpq5 default-libmysqlclient-dev libsqlite3-dev libpq-dev nodejs imagemagick \
+  && apt-get -y install default-mysql-client unixodbc libpq5 default-libmysqlclient-dev libsqlite3-dev libpq-dev nodejs imagemagick \
   && npm install uglify-js -g \
   && apt-get clean && apt-get autoremove && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -19,7 +19,7 @@ RUN apt-get update \
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |  apt-key add - \
   && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
   && apt-get update \
-  && apt-get -y install google-chrome-stable chromedriver \
+  && apt-get -y install google-chrome-stable \
   && apt-get clean && apt-get autoremove && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -41,7 +41,7 @@ RUN apt-get update && apt-get remove docker || true && apt-get remove docker-eng
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN set -ex \
-  && curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+  && curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose 
 
 RUN set -ex \
@@ -67,7 +67,6 @@ RUN set -ex \
   \nUserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
 
 RUN set -ex \
-  && gem install docker_toolkit && gem update docker_toolkit  \
   && gem install aggkit && gem update aggkit 
 
 WORKDIR /home/app

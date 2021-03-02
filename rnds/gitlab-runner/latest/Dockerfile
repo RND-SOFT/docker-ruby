@@ -77,19 +77,19 @@ RUN set -ex \
     py-setuptools
 
 RUN set -ex \
-  && pip install --ignore-installed PyYAML && pip install docker-compose==1.25.1
+  && pip install --ignore-installed PyYAML && pip install docker-compose==1.28.5
 
 RUN mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
 
 COPY docker-compose /usr/bin/
-
-RUN chmod +x /usr/bin/docker-compose
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
   httparty bundler bundler-audit socksify net-ssh io-console etc \
   pronto pronto-rubocop rubocop-rails pronto-flay nokogiri gitlab rest-client rubycritic
 
 COPY docker-compose pullcache.sh pushcache.sh /usr/bin/
+
+RUN chmod +x /usr/bin/docker-compose
 
 CMD ["/bin/bash"]
 
