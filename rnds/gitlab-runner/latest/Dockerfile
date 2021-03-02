@@ -82,6 +82,7 @@ RUN set -ex \
 RUN mv -f /usr/bin/docker-compose /usr/bin/docker-compose.orig
 
 COPY docker-compose /usr/bin/
+COPY docker-compose /usr/local/bin/
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
   httparty bundler bundler-audit socksify net-ssh io-console etc \
