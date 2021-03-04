@@ -1,12 +1,10 @@
 #!/bin/bash
 
-trap 'kill $(jobs -p)' EXIT
-
 export BUILDHOST=`hostname`
 export BUILDHOST=`getent hosts ${BUILDHOST} | cut -d' ' -f1`
 
-echo USING ${BUILDHOST} as builder IP
-echo STARTING socat: "socat TCP-LISTEN:56789,reuseaddr,fork UNIX-CLIENT:${SSH_AUTH_SOCK}"
+echo "USING ${BUILDHOST} as builder IP" >&2
+echo "STARTING socat: socat TCP-LISTEN:56789,reuseaddr,fork UNIX-CLIENT:${SSH_AUTH_SOCK}" >&2
 
 socat TCP-LISTEN:56789,reuseaddr,fork UNIX-CLIENT:${SSH_AUTH_SOCK} &
 

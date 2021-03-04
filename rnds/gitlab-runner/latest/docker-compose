@@ -6,4 +6,6 @@ socat TCP-LISTEN:56789,reuseaddr,fork UNIX-CLIENT:${SSH_AUTH_SOCK} &
 export BUILDHOST=`hostname`
 export BUILDHOST=`getent hosts ${BUILDHOST} | cut -d' ' -f1`
 
+echo "USING ${BUILDHOST} as builder IP" >&2
+
 /usr/bin/docker-compose.orig $@
