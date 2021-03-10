@@ -24,7 +24,12 @@ RUN set -ex \
 
 RUN set -ex \
   && apk add --no-cache docker python python-dev
-
+  
+RUN set -ex \
+  && cd /tmp \
+  && wget https://download.docker.com/linux/static/stable/x86_64/docker-20.10.5.tgz \
+  && tar zxvf ./docker-20.10.5.tgz \
+  && cp -f docker/docker /usr/bin 
 
 COPY  --from=docker/compose:alpine-1.28.5 /usr/local/bin/docker-compose /usr/local/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose

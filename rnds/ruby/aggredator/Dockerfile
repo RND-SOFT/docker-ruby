@@ -41,6 +41,12 @@ RUN apt-get update && apt-get remove docker || true && apt-get remove docker-eng
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN set -ex \
+  && cd /tmp \
+  && wget https://download.docker.com/linux/static/stable/x86_64/docker-20.10.5.tgz \
+  && tar zxvf ./docker-20.10.5.tgz \
+  && cp -f docker/docker /usr/bin 
+
+RUN set -ex \
   && curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose 
 
