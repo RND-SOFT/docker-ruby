@@ -82,7 +82,7 @@ RUN gem install rspec activesupport bigdecimal json awesome_print \
 
 COPY pullcache.sh pushcache.sh /usr/bin/
 
-COPY  --from=docker/compose:alpine-1.28.5 /usr/local/bin/docker-compose /usr/local/bin/docker-compose
+COPY  --from=docker/compose:alpine-1.28.6 /usr/local/bin/docker-compose /usr/local/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose
 RUN cp -f /usr/local/bin/docker-compose /usr/bin/docker-compose
 
