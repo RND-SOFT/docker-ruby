@@ -58,6 +58,7 @@ RUN set -ex \
     ruby \
     ruby-libs \
     ruby-dev \
+    ruby-etc \
     glib-dev \
     libc-dev \
     yaml-dev \
@@ -72,6 +73,7 @@ RUN echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc \
 RUN set -ex \
   && apk add --no-cache \
     nodejs \
+    yarn \
     python3-dev \
     py3-pip \
     py-setuptools
