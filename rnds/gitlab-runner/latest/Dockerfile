@@ -58,7 +58,7 @@ RUN set -ex \
     ruby \
     ruby-libs \
     ruby-dev \
-    ruby-etc \
+    ruby-etc ruby-json ruby-irb ruby-rake ruby-bigdecimal \
     glib-dev \
     libc-dev \
     yaml-dev \
