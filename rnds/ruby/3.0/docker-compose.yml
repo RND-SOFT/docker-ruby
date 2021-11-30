@@ -1,0 +1,18 @@
+version: "2"
+services:
+  ruby-3.0:
+    build: 
+      context: ./
+      dockerfile: Dockerfile.alpine
+    image: rnds/ruby:3.0
+    working_dir: /home/app
+    
+  ruby-3.0-debian:
+    build:
+      context: ./
+      dockerfile: Dockerfile.debian
+    image: rnds/ruby:3.0-debian
+    working_dir: /home/app
+    
+
+

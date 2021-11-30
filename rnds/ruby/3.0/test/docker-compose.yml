@@ -1,0 +1,12 @@
+version: "2.3"
+services:
+  ruby-3.0-test:
+    build: 
+      context: ./
+      cache_from:
+        - rnds/ruby:3.0-test
+    image: rnds/ruby:3.0-test
+    working_dir: /home/app
+    
+
+
