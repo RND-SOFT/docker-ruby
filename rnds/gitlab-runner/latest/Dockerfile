@@ -1,4 +1,5 @@
-FROM docker:stable
+# syntax=docker/dockerfile:experimental
+FROM docker:latest
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 WORKDIR /home/app
@@ -63,7 +64,8 @@ RUN set -ex \
     libc-dev \
     yaml-dev \
     zlib-dev \
-    ansible
+    ansible \
+    nomad
 
 
 RUN echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc \
@@ -80,7 +82,7 @@ RUN set -ex \
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
   httparty bundler bundler-audit socksify net-ssh io-console etc \
-  pronto pronto-rubocop rubocop-rails pronto-flay nokogiri gitlab rest-client rubycritic
+  pronto pronto-rubocop rubocop-rails pronto-flay nokogiri gitlab rest-client rubycritic 
 
 COPY pullcache.sh pushcache.sh /usr/bin/
 
