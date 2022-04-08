@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:experimental
-FROM docker:latest
+FROM docker:20.10.12-alpine3.14
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 WORKDIR /home/app
@@ -8,8 +8,20 @@ RUN mkdir -p ~/.ssh && echo -e "Host * \
   \n  StrictHostKeyChecking no \
   \n  UserKnownHostsFile=/dev/null\n" >> ~/.ssh/config
 
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 RUN set -ex \
+  && apk add --no-cache ca-certificates curl wget \
+  && curl -k https://rnds.pro/bundle_ca.crt --output /usr/local/share/ca-certificates/bundle_ca.crt \
+  && cat /usr/local/share/ca-certificates/bundle_ca.crt >> /etc/ssl/certs/ca-certificates.crt \
+  && update-ca-certificates
+
+RUN set -ex \
+  && sed 's%dl-cdn.alpinelinux.org%library.rnds.pro/repository%' -i /etc/apk/repositories \
+  && sed 's%http://%https://%' -i /etc/apk/repositories
+
+RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cache \
+  && set -ex \
   && apk add --no-cache \
     ca-certificates \
     tar \
@@ -29,6 +41,7 @@ RUN set -ex \
     libxml2 \
     wget \
     python3 \
+    python2 \
     jq \
     curl \
     libcurl \
@@ -39,7 +52,8 @@ RUN set -ex \
     socat \
     openssh
 
-RUN set -ex \
+RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cache \
+  && set -ex \
   && apk add --no-cache \
     linux-headers \
     coreutils \
@@ -67,6 +81,11 @@ RUN set -ex \
     ansible \
     nomad
 
+RUN set -ex \ 
+  && gem sources --remove https://rubygems.org \
+  && gem sources --remove https://rails-assets.org \
+  && gem sources --add https://library.rnds.pro/repository/rubygems/ \
+  && gem sources --add https://library.rnds.pro/repository/rails-assets/
 
 RUN echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc \
   && gem install docker_toolkit && gem update docker_toolkit \
