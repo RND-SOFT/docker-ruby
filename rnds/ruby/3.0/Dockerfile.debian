@@ -1,5 +1,21 @@
 FROM ruby:3.0-slim
 
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
+RUN set -ex \
+  && apt-get update && apt-get -y install ca-certificates curl wget \
+  && curl -k https://rnds.pro/bundle_ca.crt --output /usr/local/share/ca-certificates/bundle_ca.crt \
+  && cat /usr/local/share/ca-certificates/bundle_ca.crt >> /etc/ssl/certs/ca-certificates.crt \
+  && update-ca-certificates
+  
+RUN set -ex \ 
+  && gem sources --remove https://rubygems.org/ \
+  && gem sources --remove https://rails-assets.org/ \
+  && gem sources --remove https://rubygems.org \
+  && gem sources --remove https://rails-assets.org \
+  && gem sources --add https://library.rnds.pro/repository/rubygems/ \
+  && gem sources --add https://library.rnds.pro/repository/rails-assets/
+
 RUN set -ex \
   && apt-get update && apt-get upgrade -y \
   && apt-get -y install libxext6 libxrender1 curl wget git build-essential gcc make nodejs npm imagemagick \

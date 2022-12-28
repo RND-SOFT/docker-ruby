@@ -1,5 +1,25 @@
 FROM ruby:3.0-alpine3.14
 
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
+RUN set -ex \
+  && apk add --no-cache ca-certificates curl wget \
+  && curl -k https://rnds.pro/bundle_ca.crt --output /usr/local/share/ca-certificates/bundle_ca.crt \
+  && cat /usr/local/share/ca-certificates/bundle_ca.crt >> /etc/ssl/certs/ca-certificates.crt \
+  && update-ca-certificates
+  
+RUN set -ex \
+  && sed 's%dl-cdn.alpinelinux.org%library.rnds.pro/repository%' -i /etc/apk/repositories \
+  && sed 's%http://%https://%' -i /etc/apk/repositories
+
+RUN set -ex \ 
+  && gem sources --remove https://rubygems.org/ \
+  && gem sources --remove https://rails-assets.org/ \
+  && gem sources --remove https://rubygems.org \
+  && gem sources --remove https://rails-assets.org \
+  && gem sources --add https://library.rnds.pro/repository/rubygems/ \
+  && gem sources --add https://library.rnds.pro/repository/rails-assets/
+
 RUN set -ex \
   && apk add --no-cache \
     autoconf \
@@ -66,12 +86,6 @@ RUN set -ex \
     file-dev \
   && rm -rf /var/cache/apk/*
   
-RUN set -ex \
-  && cat /etc/apk/repositories | sed 's%dl-cdn.alpinelinux.org%cache.rnds.local/repository%' >> /etc/apk/repositories.new \
-  && cat /etc/apk/repositories | sed 's%https://dl-cdn.alpinelinux.org%http://cache.rnds.local/repository%' >> /etc/apk/repositories.new \
-  && cat /etc/apk/repositories >> /etc/apk/repositories.new \
-  && mv /etc/apk/repositories.new /etc/apk/repositories
-
 WORKDIR /home/app
 
 CMD ["/bin/bash"]

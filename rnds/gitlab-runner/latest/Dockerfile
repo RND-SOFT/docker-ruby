@@ -89,7 +89,8 @@ RUN set -ex \
 
 RUN echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc \
   && gem install docker_toolkit && gem update docker_toolkit \
-  && gem install aggkit && gem update aggkit
+  && gem install aggkit && gem update aggkit \
+  && gem install retag && gem update retag
 
 RUN set -ex \
   && apk add --no-cache \
@@ -97,7 +98,8 @@ RUN set -ex \
     yarn \
     python3-dev \
     py3-pip \
-    py-setuptools
+    py-setuptools \
+    redis
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
   httparty bundler bundler-audit socksify net-ssh io-console etc \

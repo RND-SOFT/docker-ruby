@@ -35,12 +35,11 @@ RUN chmod +x /usr/local/bin/docker-compose
 RUN cp -f /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 RUN docker-compose -version
-  
+
+COPY  --from=harbor.rnds.pro/aggredator/consul:latest /bin/consul /bin/consul
+RUN chmod +x /bin/consul
 
 RUN set -ex \
-  && curl -sSLo /tmp/consul.zip https://releases.hashicorp.com/consul/1.2.2/consul_1.2.2_linux_amd64.zip \
-  && unzip -d /bin /tmp/consul.zip && strip /bin/consul && rm -rf /tmp/consul.zip \
-  && mkdir -p /tmp/consul \
   && curl https://releases.rancher.com/cli2/v2.0.5/rancher-linux-amd64-v2.0.5.tar.gz | tar -xz \
   && cp ./rancher-*/rancher /bin/rancher \
   && rm -rf rancher-* \
