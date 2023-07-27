@@ -5,6 +5,8 @@ services:
       context: ./
       cache_from:
         - rnds/ruby:3.0-test
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     image: rnds/ruby:3.0-test
     working_dir: /home/app
     

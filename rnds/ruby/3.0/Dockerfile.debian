@@ -1,3 +1,5 @@
+ARG BUILDKIT_INLINE_CACHE=1
+
 FROM ruby:3.0-slim
 
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -18,7 +20,7 @@ RUN set -ex \
 
 RUN set -ex \
   && apt-get update && apt-get upgrade -y \
-  && apt-get -y install libxext6 libxrender1 curl wget git build-essential gcc make nodejs npm imagemagick \
+  && apt-get -y install libxext6 libxrender1 curl wget git build-essential gcc make nodejs npm imagemagick jq \
   && npm install uglify-js -g \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

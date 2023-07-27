@@ -1,3 +1,5 @@
+ARG BUILDKIT_INLINE_CACHE=1
+
 FROM ruby:3.0-alpine3.14
 
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -69,6 +71,7 @@ RUN set -ex \
     unixodbc-dev \
     wget \
     xz \
+    jq \
     yaml-dev \
     zlib-dev \
   && npm install -g uglify-js \

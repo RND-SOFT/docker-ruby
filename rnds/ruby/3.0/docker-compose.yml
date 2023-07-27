@@ -4,6 +4,8 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile.alpine
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     image: rnds/ruby:3.0
     working_dir: /home/app
     
@@ -11,6 +13,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.debian
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     image: rnds/ruby:3.0-debian
     working_dir: /home/app
     

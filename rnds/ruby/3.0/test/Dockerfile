@@ -1,3 +1,5 @@
+ARG BUILDKIT_INLINE_CACHE=1
+
 FROM rnds/ruby:3.0
 
 RUN set -ex \
