@@ -17,9 +17,9 @@ RUN set -ex \
   && cat /usr/local/share/ca-certificates/bundle_ca.crt >> /etc/ssl/certs/ca-certificates.crt \
   && update-ca-certificates
 
-# RUN set -ex \
-#   && sed 's%dl-cdn.alpinelinux.org%library.rnds.pro/repository%' -i /etc/apk/repositories \
-#   && sed 's%http://%https://%' -i /etc/apk/repositories
+RUN set -ex \
+  && sed 's%dl-cdn.alpinelinux.org%library.rnds.pro/repository%' -i /etc/apk/repositories \
+  && sed 's%http://%https://%' -i /etc/apk/repositories
 
 RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cache \
   && set -ex \
