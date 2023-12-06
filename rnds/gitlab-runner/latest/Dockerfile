@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:experimental
-FROM docker:20.10.12-alpine3.14
+FROM docker:24.0.7-alpine3.18
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 WORKDIR /home/app
@@ -11,14 +11,15 @@ RUN mkdir -p ~/.ssh && echo -e "Host * \
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 RUN set -ex \
+  && apk update \
   && apk add --no-cache ca-certificates curl wget \
   && curl -k https://rnds.pro/bundle_ca.crt --output /usr/local/share/ca-certificates/bundle_ca.crt \
   && cat /usr/local/share/ca-certificates/bundle_ca.crt >> /etc/ssl/certs/ca-certificates.crt \
   && update-ca-certificates
 
-RUN set -ex \
-  && sed 's%dl-cdn.alpinelinux.org%library.rnds.pro/repository%' -i /etc/apk/repositories \
-  && sed 's%http://%https://%' -i /etc/apk/repositories
+# RUN set -ex \
+#   && sed 's%dl-cdn.alpinelinux.org%library.rnds.pro/repository%' -i /etc/apk/repositories \
+#   && sed 's%http://%https://%' -i /etc/apk/repositories
 
 RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cache \
   && set -ex \
@@ -34,14 +35,14 @@ RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cac
     postgresql-dev \
     postgresql-client \
     libstdc++ \
-    libressl \
-    libressl-dev \
+    # libressl \
+    # libressl-dev \
     sqlite \
     sqlite-dev \
     libxml2 \
     wget \
     python3 \
-    python2 \
+#    python2 \
     jq \
     curl \
     libcurl \
