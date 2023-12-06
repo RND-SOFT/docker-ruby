@@ -11,7 +11,6 @@ RUN mkdir -p ~/.ssh && echo -e "Host * \
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 RUN set -ex \
-  && apk update \
   && apk add --no-cache ca-certificates curl wget \
   && curl -k https://rnds.pro/bundle_ca.crt --output /usr/local/share/ca-certificates/bundle_ca.crt \
   && cat /usr/local/share/ca-certificates/bundle_ca.crt >> /etc/ssl/certs/ca-certificates.crt \
@@ -42,7 +41,7 @@ RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cac
     libxml2 \
     wget \
     python3 \
-#    python2 \
+    #python2 \
     jq \
     curl \
     libcurl \
