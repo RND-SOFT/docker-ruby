@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:experimental
-FROM docker:20.10.12-alpine3.14
+FROM docker:24.0.7-alpine3.18
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 WORKDIR /home/app
@@ -34,14 +34,14 @@ RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cac
     postgresql-dev \
     postgresql-client \
     libstdc++ \
-    libressl \
-    libressl-dev \
+    # libressl \
+    # libressl-dev \
     sqlite \
     sqlite-dev \
     libxml2 \
     wget \
     python3 \
-    python2 \
+    #python2 \
     jq \
     curl \
     libcurl \
