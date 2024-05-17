@@ -2,7 +2,7 @@ version: "2.3"
 
 services:
   gitlab-runner:
-    build: 
+    build:
       context: ./
       args:
         BUILDKIT_INLINE_CACHE: 1
@@ -10,6 +10,3 @@ services:
         - rnds/gitlab-runner:latest
     image: rnds/gitlab-runner
     working_dir: /home/app
-    
-
-

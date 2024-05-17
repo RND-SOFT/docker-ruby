@@ -1,5 +1,7 @@
 # syntax=docker/dockerfile:experimental
-FROM docker:20.10.12-alpine3.14
+FROM harbor.rnds.pro/dockerhub/library/node:16.20.2-alpine AS node
+
+FROM docker:25.0.5-alpine3.19
 MAINTAINER Firmhouse "kinnalru@gmail.com"
 
 WORKDIR /home/app
@@ -34,14 +36,11 @@ RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cac
     postgresql-dev \
     postgresql-client \
     libstdc++ \
-    libressl \
-    libressl-dev \
     sqlite \
     sqlite-dev \
     libxml2 \
     wget \
     python3 \
-    python2 \
     jq \
     curl \
     libcurl \
@@ -78,10 +77,9 @@ RUN --mount=type=cache,target=/var/cache/apk ln -vsf /var/cache/apk /etc/apk/cac
     libc-dev \
     yaml-dev \
     zlib-dev \
-    ansible \
-    nomad
+    ansible
 
-RUN set -ex \ 
+RUN set -ex \
   && gem sources --remove https://rubygems.org \
   && gem sources --remove https://rails-assets.org \
   && gem sources --add https://library.rnds.pro/repository/rubygems/ \
@@ -92,25 +90,26 @@ RUN echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc \
   && gem install aggkit && gem update aggkit \
   && gem install retag && gem update retag
 
+  COPY --from=node /usr/local/lib/node_modules /usr/local/lib
+  COPY --from=node /opt /opt
+  COPY --from=node /usr/local/bin /usr/local/bin
+
 RUN set -ex \
   && apk add --no-cache \
-    nodejs \
     yarn \
     python3-dev \
     py3-pip \
     py-setuptools \
+    s3cmd \
     redis
 
 RUN gem install rspec activesupport bigdecimal json awesome_print \
   httparty bundler bundler-audit socksify net-ssh io-console etc \
-  pronto pronto-rubocop rubocop-rails pronto-flay nokogiri gitlab rest-client rubycritic 
+  pronto pronto-rubocop rubocop-rails pronto-flay nokogiri gitlab rest-client rubycritic
 
 COPY pullcache.sh pushcache.sh /usr/bin/
 
-RUN set -ex \
-  && pip3 install s3cmd
-
-COPY  --from=docker/compose:alpine-1.28.6 /usr/local/bin/docker-compose /usr/local/bin/docker-compose
+COPY  --from=docker/compose:alpine-1.29.2 /usr/local/bin/docker-compose /usr/local/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose
 RUN cp -f /usr/local/bin/docker-compose /usr/bin/docker-compose
 
@@ -122,8 +121,3 @@ RUN chmod +x /usr/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose
 
 CMD ["/bin/bash"]
-
-
-
-
-
